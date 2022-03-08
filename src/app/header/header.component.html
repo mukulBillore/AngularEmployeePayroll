@@ -1,0 +1,16 @@
+
+<header class="header-content header">
+    <div class="logo-content">
+        <img src="../assets/EmpLogo.png" alt="logo">
+        <div>
+            <span class="emp-text">EMPLOYEE</span><br>
+            <span class="emp-text emp-payroll">PAYROLL</span>
+        </div>
+    </div>
+</header>
+    <div class="p-3 mb-2 bg-light text-dark welcome">
+        <h2>Welcome to Employee Payroll Service</h2>
+        <button type="button" class="btn btn-info" (click)="onDashboard()">Dashboard</button>
+        <button type="button" class="btn btn-info" (click)="onForm()">Form</button>
+    </div>
+    <router-outlet></router-outlet>
