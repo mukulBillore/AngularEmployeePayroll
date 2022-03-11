@@ -12,7 +12,8 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onAddUser(){
+
+  onAddUser() {
     this.router.navigate(["form"]);
   }
 }
