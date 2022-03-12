@@ -1,113 +1,49 @@
 <div class="main-content">
-    <div class="header-content employee-header">
-      <div class="emp-detail-text">
-        Employee Details
-        <div class="emp-count">10</div>
-      </div>
-      <div class="form-group">
-        <input type="text" class="form-control" placeholder="Search Here" >
+  <div class="header-content employee-header">
+    <div class="emp-detail-text">
+      Employee Details
+      <!-- Here we display emp-count, means total record of employee -->
+      <div class="emp-count">{{employee.data.length}}</div>
     </div>
-        <button class="add-button" (click)="onAddUser()"><img src="../assets/plus_symbol.svg" />Add User</button>  
-    </div>
-   
-  
-  
-    <div class="table-main">
-      <table id="table-display" class="table">
-        <tr>
-          <!--Table header-->
-          <th></th>
-          <th>Name</th>
-          <th>Gender</th>
-          <th>Department</th>
-          <th>Salary</th>
-          <th>Start Date</th>
-          <th>Actions</th>
-      </tr>
-      <tr>
-        <td>
-            <img class="profile" src="../assets/profile_img-2.png" alt="">
-        </td>
-        <td>Abhishek</td>
-        <td>Male</td>
-        <td>
-            <div class="dept-label">
-                <h6>Finance</h6>
-            </div>
-        </td>
-        <td>30000</td>
-        <td>13 March 2021</td>
-  
-        <!--To update and delete an employee from the database-->
-        <td>
-             
-            <img src="../assets/delete.svg" alt="delete">
-            <img src="../assets/edit.svg" alt="edit">
-        </td>
-    </tr>
-    <tr>
-      <td>
-          <img class="profile" src="../assets/profile_img-4.png" alt="">
-      </td>
-      <td>Arpit</td>
-      <td>Male</td>
-      <td>
-          <div class="dept-label">
-              <h6>Operations</h6>
-          </div>
-      </td>
-      <td>50000</td>
-      <td>17 April 2020</td>
-  
-      <!--To update and delete an employee from the database-->
-      <td>
-           
-          <img src="../assets/delete.svg" alt="delete">
-          <img src="../assets/edit.svg" alt="edit">
-      </td>
-  </tr>
-  <tr>
-    <td>
-        <img class="profile" src="../assets/profile_img-4.png" alt="">
-    </td>
-    <td>Ravikant</td>
-    <td>Male</td>
-    <td>
-        <div class="dept-label">
-            <h6>Developer</h6>
-        </div>
-    </td>
-    <td>700000</td>
-    <td>10 December 2017</td>
-
-    <!--To update and delete an employee from the database-->
-    <td>
-         
-        <img src="../assets/delete.svg" alt="delete">
-        <img src="../assets/edit.svg" alt="edit">
-    </td>
-</tr>
-<tr>
-    <td>
-        <img class="profile" src="../assets/profile_img-3.png" alt="">
-    </td>
-    <td>Ananya</td>
-    <td>Female</td>
-    <td>
-        <div class="dept-label">
-            <h6>HR</h6>
-        </div>
-    </td>
-    <td>330000</td>
-    <td>25 April 2018</td>
-
-    <!--To update and delete an employee from the database-->
-    <td>
-         
-        <img src="../assets/delete.svg" alt="delete">
-        <img src="../assets/edit.svg" alt="edit">
-    </td>
-</tr>
-      </table>
-    </div>
+    <!-- when a user click on add user button then the onAddUser function is call which we implement in dashboard component -->
+    <button class="add-button" (click)="onAddUser()"><img src="../assets/plus_symbol.svg" />Add User</button>
   </div>
+
+  <div class="table-main">
+    <table id="table-display" class="table">
+      <tr>
+        <!--Table header-->
+        <th>ID</th>
+        <th>Profile</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Start Date</th>
+        <th>Actions</th>
+      </tr>
+
+      <!-- those values which we get from the database will be display in the view 
+        using http get call which we defined in our employee service class -->
+      <tr *ngFor="let emp of employee.data" class="detailoftab">
+        <td>{{emp.employeeId}}</td>
+        <td><img [src]="emp.profilePic" alt=""></td>
+        <td>{{emp.name | titlecase}}</td>
+        <td>{{emp.gender | uppercase}}</td>
+        <td>{{emp.department}}</td>
+        <td>{{emp.salary | currency:'&#8377;' }}</td>
+        <td>{{emp.date | date }}</td>
+        <td>
+          <!-- when a user click on the delete icon then click function is called 
+            named as deleteById which we implemented in dashboard component -->
+          <img src="../assets/delete.svg" (click)="deleteById(emp.employeeId)">
+          <!-- &nbsc is used for giving spaces  -->
+          &nbsp;
+          <!-- when a user click on the edit icon then click function is
+             called named as editById which we implemented in dashboard component -->
+          <img src="../assets/edit.svg" (click)="editById(emp.employeeId,emp)">
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,14 +1,22 @@
+<!-- it is a header component -->
 <header class="header-content header">
     <div class="logo-content">
+        <!-- when a user click on the logo or brand name Employee PAYROLL then onDashboard function is called
+             which let the user on dasboard page -->
         <img src="../assets/EmpLogo.png" alt="logo" (click)="onDashboard()">
         <div (click)="onDashboard()">
             <span class="emp-text">EMPLOYEE</span><br>
             <span class="emp-text emp-payroll">PAYROLL</span>
         </div>
+
+        <!-- here we define two button and apply click event on that when a user click on dashboard then 
+        onDashboard finction is called and it wil navigate user from header to dashboard compoenent
+        or if the user hit the form button then it will navgate to the form component or we can say navigate to form view page
+        -->
         <div class="button">
-                <button type="button" class="btn btn-success" (click)="onDashboard()">Dashboard</button>
-                <button type="button" class="btn btn-success" (click)="onForm()">Form</button>
-         </div>
+            <button type="button" class="btn btn-success" (click)="onDashboard()">Dashboard</button>
+            <button type="button" class="btn btn-success" (click)="onForm()">Form</button>
+        </div>
     </div>
 </header>
 <router-outlet></router-outlet>
