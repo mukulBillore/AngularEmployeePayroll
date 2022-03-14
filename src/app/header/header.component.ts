@@ -15,16 +15,16 @@ export class HeaderComponent implements OnInit {
   public title:string="Employee Payroll";
 
 
- //when a component get initialized the ngOnInit function is called first
+ // When a component get  initialized the ngOnInit function is called first
   ngOnInit(): void {
   }
 
-  // this function navigate the user from header to DashboardComponent or we can say that navigate to dashbard view
+  // TO navigate the user  to DashboardComponent 
   onDashboard(){
     this.router.navigate(["dashboard"]);
   }
 
-  // navigate to form component
+  // To navigate to form component
   onForm(){
     this.router.navigate(["form"]);
   }

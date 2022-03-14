@@ -10,39 +10,54 @@ import { EmployeeService } from '../employee.service';
 
 export class DashboardComponent implements OnInit {
 
-  //injected dependencies which is required to render view properly 
+  // Injected dependencies 
   constructor(private router: Router, private service: EmployeeService) { }
-  employee: any;
 
+  employee: any;
 
   ngOnInit(): void {
 
-    //Subscribe Invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
+    // Subscribe invokes an execution of an Observable and registers Observer handlers for notifications it will emit.
     this.service.getEmployee().subscribe(data => {
-      console.log(data);
       this.employee = data;
-    });
-    console.log(this.employee)
-  }
+      console.log("hello");
+      console.log(this.employee);
+      console.log("end");
 
-  //when an onAddUser funstion is called, it will naviagte to the form view
+    });
+   }
+
+  // when an onAddUser funstion is called, it will naviagte to the form view
   onAddUser() {
-    //it will navigate imperatively in your component classes
-    this.router.navigate(["form"]);
+       this.router.navigate(["form"]);
   }
 
-  //call deleteEmployeeById method of service to delete employee
+  //  Call deleteDataById method of service to delete employee
   deleteById(Id: number) {
-    this.service.deleteEmployee(Id).subscribe(data => {
-      //when a user get deleted from databse it will print data is deleted in console
-      console.log("Data is deleted")
-      //with the help of window.location.reload:-when we delete user the when we dont have to reload the page again
-      window.location.reload()
-    });
+//    this.service.deleteEmployee(Id).subscribe(data =>{ 
+      console.log(Id);  
+      this.service.deleteById(Id).subscribe((data)  =>{
+      console.log("data deleted!!!!! test");
+      this.ngOnInit();
+      //console.log(data);
+      // this.router.navigate(["dashboard"]);
+      });
+      
+//    console.log("Data is deleted");
+     
+      // window.location.reload();
+     // this.ngOnInit();
+    
+      // NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      //window.location.href = window.location.href;
+
+      // NOT WORKING!!!!!!!!!!!!!!!!!!!!!!!!!!!
+     
+    //})
   }
 
-  //navigates page to update which has form component to load existing employee record for updation
-  editById(Id: number, employee: any) {
+  // load existing employee record for updation on the form page
+  editById(Id: number) {
     this.router.navigate(['update', Id]);
   }
 

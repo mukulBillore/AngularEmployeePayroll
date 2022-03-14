@@ -1,9 +1,9 @@
 <div class="main-content">
   <div class="header-content employee-header">
     <div class="emp-detail-text">
-      Employee Details
-      <!-- Here we display emp-count, means total record of employee -->
-      <div class="emp-count">{{employee.data.length}}</div>
+      Employee Details<br>
+      <!-- Display totel employ count -->
+      <div class="emp-count">12</div>
     </div>
     <!-- when a user click on add user button then the onAddUser function is call which we implement in dashboard component -->
     <button class="add-button" (click)="onAddUser()"><img src="../assets/plus_symbol.svg" />Add User</button>
@@ -13,9 +13,11 @@
     <table id="table-display" class="table">
       <tr>
         <!--Table header-->
+        
+        <th></th>
         <th>ID</th>
-        <th>Profile</th>
-        <th>Name</th>
+        <th>firstName</th>
+        <th>lastName</th>
         <th>Gender</th>
         <th>Department</th>
         <th>Salary</th>
@@ -23,25 +25,26 @@
         <th>Actions</th>
       </tr>
 
-      <!-- those values which we get from the database will be display in the view 
-        using http get call which we defined in our employee service class -->
-      <tr *ngFor="let emp of employee.data" class="detailoftab">
-        <td>{{emp.employeeId}}</td>
+      <!-- Using ngFor loop getting all the employee's form the database and displaying it 
+      on the dashboad -->
+      <tr *ngFor="let emp of employee" class="detailoftab">
+        <td>{{emp.id}}</td>
         <td><img [src]="emp.profilePic" alt=""></td>
-        <td>{{emp.name | titlecase}}</td>
-        <td>{{emp.gender | uppercase}}</td>
+        <td>{{emp.firstName | titlecase}}</td>
+        <td>{{emp.lastName | titlecase}}</td>
+        <td>{{emp.gender}}</td>
         <td>{{emp.department}}</td>
         <td>{{emp.salary | currency:'&#8377;' }}</td>
         <td>{{emp.date | date }}</td>
         <td>
-          <!-- when a user click on the delete icon then click function is called 
-            named as deleteById which we implemented in dashboard component -->
-          <img src="../assets/delete.svg" (click)="deleteById(emp.employeeId)">
+          <!-- On clicking the delete icon deleteByID is called 
+            which is implemented in dashboard component.ts file -->
+          <img src="../assets/delete.svg" (click)="deleteById(emp.id)"/>
           <!-- &nbsc is used for giving spaces  -->
-          &nbsp;
+         
           <!-- when a user click on the edit icon then click function is
              called named as editById which we implemented in dashboard component -->
-          <img src="../assets/edit.svg" (click)="editById(emp.employeeId,emp)">
+          <img src="../assets/edit.svg" (click)="editById(emp.id)"/>
         </td>
       </tr>
     </table>
